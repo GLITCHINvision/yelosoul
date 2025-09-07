@@ -6,9 +6,9 @@ const connectDB = async () => {
       dbName: "yelosoulDB", // Optional, but ensures it always uses the correct DB
     });
 
-    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
+    console.log(` MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.error(`❌ MongoDB Connection Failed: ${error.message}`);
+    console.error(` MongoDB Connection Failed: ${error.message}`);
     process.exit(1);
   }
 };
