@@ -60,7 +60,7 @@ export default function CheckoutPage() {
 
      
       const { data: paymentOrder } = await axios.post(
-        "http://localhost:5000/api/orders/payment", // ✅ FIXED ROUTE
+        "http://localhost:5000/api/orders/payment", 
         { totalPrice },
         { headers: { Authorization: `Bearer ${token}` } }
       );
