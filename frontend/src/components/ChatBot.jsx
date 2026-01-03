@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 import { MessageCircle, X, Send, ShoppingBag, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -32,7 +33,7 @@ const ChatBot = () => {
     setLoading(true);
 
     try {
-      const { data } = await axios.post("http://localhost:5000/api/chat", {
+      const { data } = await axios.post(`${API_URL}/chat`, {
         message: userMessage.text,
       });
 
@@ -109,8 +110,8 @@ const ChatBot = () => {
               >
                 <div
                   className={`max-w-[85%] p-3 rounded-2xl text-sm leading-relaxed ${msg.sender === "user"
-                      ? "bg-yellow-400 text-gray-900 rounded-br-none font-medium"
-                      : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-bl-none shadow-sm"
+                    ? "bg-yellow-400 text-gray-900 rounded-br-none font-medium"
+                    : "bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 border border-gray-200 dark:border-gray-700 rounded-bl-none shadow-sm"
                     }`}
                 >
                   {msg.text}

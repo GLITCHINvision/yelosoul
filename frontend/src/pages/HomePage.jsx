@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import ProductCard from "../components/ProductCard";
@@ -28,7 +29,7 @@ export default function HomePage() {
     const fetchProducts = async () => {
       try {
         // Fetch ALL products (up to 1000) so client-side filtering works on the whole catalog
-        const { data } = await axios.get("http://localhost:5000/api/products?limit=1000");
+        const { data } = await axios.get(`${API_URL}/products?limit=1000`);
         setProducts(data?.products || []);
       } catch (err) {
         setError("Failed to load collections.");

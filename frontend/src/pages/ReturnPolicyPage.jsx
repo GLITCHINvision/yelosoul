@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 
 export default function ReturnRequestForm() {
@@ -22,7 +23,7 @@ export default function ReturnRequestForm() {
     setStatus("");
 
     try {
-      await axios.post("http://localhost:5000/api/send-return", formData);
+      await axios.post(`${API_URL}/send-return`, formData);
       setStatus("success");
       setFormData({ name: "", email: "", orderId: "", reason: "" });
     } catch (error) {

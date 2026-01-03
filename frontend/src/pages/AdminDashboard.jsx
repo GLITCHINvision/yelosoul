@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 import { Plus, Trash2, Edit2, X, UploadCloud, Search } from "lucide-react";
 import { toast } from "react-hot-toast";
@@ -22,7 +23,7 @@ export default function AdminDashboard() {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/products");
+      const { data } = await axios.get(`${API_URL}/products`);
       setProducts(data?.products || []);
     } catch (err) {
       toast.error("Failed to load products");
@@ -53,11 +54,11 @@ export default function AdminDashboard() {
 
       if (editId) {
         // Update
-        await axios.put(`http://localhost:5000/api/products/${editId}`, productData, config);
+        await axios.put(`${API_URL}/products/${editId}`, productData, config);
         toast.success("Product updated successfully");
       } else {
         // Create
-        await axios.post("http://localhost:5000/api/products", productData, config);
+        await axios.post(`${API_URL}/products`, productData, config);
         toast.success("Product created successfully");
       }
 
@@ -74,7 +75,7 @@ export default function AdminDashboard() {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/products/${id}`, {
+      await axios.delete(`${API_URL}/products/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       toast.success("Product deleted");

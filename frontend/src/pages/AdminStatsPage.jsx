@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import StatsCounter from "../components/StatsCounter";
 import { Bar, Line } from "react-chartjs-2";
 import {
@@ -35,7 +36,7 @@ export default function AdminStatsPage() {
     try {
       const token = localStorage.getItem("token");
       // We'll try to fetch, if it fails we might have 0 stats, which is fine.
-      const response = await fetch("http://localhost:5000/api/orders", {
+      const response = await fetch(`${API_URL}/orders`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       if (response.ok) {

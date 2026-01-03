@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 
@@ -9,7 +10,7 @@ export default function ProductsPage() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/products");
+        const { data } = await axios.get(`${API_URL}/products`);
         setProducts(data?.products || []);
       } catch (err) {
         console.error("Error fetching products:", err);

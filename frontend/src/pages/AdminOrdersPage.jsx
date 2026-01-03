@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 import { Search, Loader, RefreshCw, Filter, Package, ChevronDown } from "lucide-react";
 
@@ -13,7 +14,7 @@ export default function AdminOrdersPage() {
     try {
       setLoading(true);
       const token = localStorage.getItem("token");
-      const { data } = await axios.get("http://localhost:5000/api/orders", {
+      const { data } = await axios.get(`${API_URL}/orders`, {
         headers: { Authorization: `Bearer ${token}` },
       });
 
@@ -38,7 +39,7 @@ export default function AdminOrdersPage() {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        `http://localhost:5000/api/orders/${orderId}/status`,
+        `${API_URL}/orders/${orderId}/status`,
         { status: newStatus },
         { headers: { Authorization: `Bearer ${token}` } }
       );

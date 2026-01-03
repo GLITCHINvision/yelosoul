@@ -1,4 +1,5 @@
 import { useCart } from "../context/CartContext";
+import { API_URL } from "../config";
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -61,7 +62,7 @@ export default function CheckoutPage() {
 
 
       const { data: paymentOrder } = await axios.post(
-        "http://localhost:5000/api/orders/payment",
+        `${API_URL}/orders/payment`,
         { totalPrice },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -78,7 +79,7 @@ export default function CheckoutPage() {
           try {
 
             await axios.post(
-              "http://localhost:5000/api/orders/verify-payment",
+              `${API_URL}/orders/verify-payment`,
               {
                 razorpay_order_id: response.razorpay_order_id,
                 razorpay_payment_id: response.razorpay_payment_id,
@@ -89,7 +90,7 @@ export default function CheckoutPage() {
 
 
             const { data: placedOrder } = await axios.post(
-              "http://localhost:5000/api/orders",
+              `${API_URL}/orders`,
               {
                 orderItems: cart.map((item) => ({
                   name: item.name,

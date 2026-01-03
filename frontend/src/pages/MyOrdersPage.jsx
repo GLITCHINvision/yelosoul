@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { API_URL } from "../config";
 import { useNavigate, Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import axios from "axios";
@@ -22,7 +23,7 @@ export default function MyOrdersPage() {
       }
 
       const { data } = await axios.get(
-        "http://localhost:5000/api/orders/my-orders",
+        `${API_URL}/orders/my-orders`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 

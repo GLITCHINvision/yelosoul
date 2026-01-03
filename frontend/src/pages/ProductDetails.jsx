@@ -1,10 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
+import { API_URL } from "../config";
 import { useCart } from "../context/CartContext";
 import { useState, useEffect, useMemo, useRef } from "react";
 import axios from "axios";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
-const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+// Replaced local BASE_URL with imported API_URL
+
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -47,7 +49,7 @@ export default function ProductDetails() {
   // Fetch product
   const fetchProduct = async () => {
     try {
-      const { data } = await axios.get(`${BASE_URL}/api/products/${id}`);
+      const { data } = await axios.get(`${API_URL}/products/${id}`);
       setProduct(data);
       setError("");
     } catch (err) {
@@ -87,7 +89,7 @@ export default function ProductDetails() {
     try {
       setReviewLoading(true);
       await axios.post(
-        `${BASE_URL}/api/products/${id}/reviews`,
+        `${API_URL}/products/${id}/reviews`,
         { rating, comment },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -109,7 +111,7 @@ export default function ProductDetails() {
     if (!window.confirm("Are you sure you want to delete this review?")) return;
 
     try {
-      await axios.delete(`${BASE_URL}/api/products/${id}/reviews/${reviewId}`, {
+      await axios.delete(`${API_URL}/products/${id}/reviews/${reviewId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       await fetchProduct();

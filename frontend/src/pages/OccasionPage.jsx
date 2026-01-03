@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { API_URL } from "../config";
 import axios from "axios";
 import ProductCard from "../components/ProductCard";
 
@@ -11,7 +12,7 @@ const OccasionPage = () => {
   useEffect(() => {
     const fetchOccasions = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/occasions");
+        const { data } = await axios.get(`${API_URL}/occasions`);
         const occasionsData = Array.isArray(data.occasions) ? data.occasions : [];
         setOccasions(occasionsData);
         if (occasionsData.length > 0) {
@@ -88,8 +89,8 @@ const OccasionPage = () => {
                     key={occasion._id}
                     onClick={() => scrollToSection(occasion._id)}
                     className={`whitespace-nowrap px-6 py-2 rounded-full text-sm uppercase tracking-wider transition-all duration-300 ${activeTab === occasion._id
-                        ? "bg-[#2c3e50] text-white shadow-md transform scale-105"
-                        : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                      ? "bg-[#2c3e50] text-white shadow-md transform scale-105"
+                      : "bg-gray-100 text-gray-500 hover:bg-gray-200"
                       }`}
                   >
                     {occasion.name}

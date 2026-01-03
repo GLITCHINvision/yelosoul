@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { API_URL } from "../config";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function ResetPassword() {
@@ -19,7 +20,7 @@ export default function ResetPassword() {
     setLoading(true);
 
     try {
-      const res = await fetch(`http://localhost:5000/api/users/reset-password/${token}`, {
+      const res = await fetch(`${API_URL}/users/reset-password/${token}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
