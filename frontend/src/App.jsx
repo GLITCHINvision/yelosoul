@@ -20,6 +20,8 @@ const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const OrderHistory = lazy(() => import("./pages/OrderHistory"));
 const Login = lazy(() => import("./pages/Login"));
 const Signup = lazy(() => import("./pages/Signup"));
+const ForgotPassword = lazy(() => import("./pages/ForgotPassword"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const WishlistPage = lazy(() => import("./pages/WishlistPage"));
 const AdminStatsPage = lazy(() => import("./pages/AdminStatsPage"));
 const ProductsPage = lazy(() => import("./pages/ProductsPage"));
@@ -28,6 +30,8 @@ const ProductsPage = lazy(() => import("./pages/ProductsPage"));
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import ProtectedRoute from "./components/ProtectedRoute";
+import ChatBot from "./components/ChatBot";
+
 
 //  Scroll to Top on route change
 function ScrollToTop() {
@@ -66,6 +70,8 @@ export default function App() {
               <Route path="/wishlist" element={<WishlistPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
+              <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password/:token" element={<ResetPassword />} />
               <Route path="/occasions" element={<OccasionPage />} />
               <Route path="/my-orders" element={<MyOrdersPage />} />
               <Route path="/admin-orders" element={<AdminOrdersPage />} />
@@ -100,8 +106,10 @@ export default function App() {
 
       {/*  Footer & Toast Notifications */}
       <Footer />
+      <ChatBot />
       <Toaster position="top-right" reverseOrder={false} />
     </div>
+
   );
 }
 

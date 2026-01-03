@@ -20,7 +20,9 @@ import cartRoutes from "./routes/cartRoutes.js";
 import wishlistRoutes from "./routes/wishlistRoutes.js";
 import occasionRoutes from "./routes/occasionRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
-import uploadRoutes from "./routes/uploadRoutes.js"; 
+import uploadRoutes from "./routes/uploadRoutes.js";
+import chatRoutes from "./routes/chatRoutes.js";
+
 
 dotenv.config();
 const __filename = fileURLToPath(import.meta.url);
@@ -112,7 +114,9 @@ app.use("/api/cart", cartRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/occasions", occasionRoutes);
 app.use("/api/users", userRoutes);
-app.use("/api/upload", uploadRoutes); 
+app.use("/api/upload", uploadRoutes);
+app.use("/api/chat", chatRoutes);
+
 
 
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

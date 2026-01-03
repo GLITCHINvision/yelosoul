@@ -10,10 +10,8 @@ export default function ProtectedRoute({ children, adminOnly = false }) {
 
   //  Only admins can access adminOnly routes
   if (adminOnly && !currentUser.isAdmin) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/" replace />; // Redirect non-admins to home
   }
 
   return children;
 }
-
-

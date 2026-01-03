@@ -9,6 +9,8 @@ const userSchema = mongoose.Schema(
     isAdmin: { type: Boolean, default: false },
     cart: { type: Array, default: [] },
     wishlist: { type: Array, default: [] },
+    resetPasswordToken: { type: String },
+    resetPasswordExpire: { type: Date },
   },
   { timestamps: true }
 );

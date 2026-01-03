@@ -1,116 +1,139 @@
-import { FaInstagram, FaLinkedin, FaWhatsapp } from "react-icons/fa";
+import { FaInstagram, FaLinkedin, FaWhatsapp, FaEnvelope, FaMapMarkerAlt, FaPhoneAlt } from "react-icons/fa";
 
-export default function AboutAndContactPage() {
+export default function ContactUsPage() {
   return (
-    <div className="max-w-6xl mx-auto p-6">
-      {/* ---------- BRAND STORY ---------- */}
-      <section className="text-center mb-16">
-        <h1 className="text-4xl font-bold text-gray-900 mb-4 tracking-wide">
-          About <span className="text-pink-400">YeloSoul</span>
-        </h1>
-        <p className="text-gray-700 text-sm max-w-2xl mx-auto leading-relaxed">
-          YeloSoul isn’t just jewelry it’s <strong>timeless elegance</strong> crafted
-          sustainably. Every piece is designed to empower you while respecting the planet.
-        </p>
-        <blockquote className="mt-6 italic text-gray-600 max-w-md mx-auto text-sm">
-          “Luxury should be meaningful, sustainable, and a reflection of your soul.”
-        </blockquote>
-        <img
-          src="https://i.ibb.co/0ySFMvfM/Yelo-Soul-20250227-175858-0000-page-0001-removebg-preview-1.png"
-          alt="YeloSoul Jewelry"
-          className="mt-6 rounded-xl shadow-lg w-full max-h-80 object-cover"
-        />
-      </section>
-
-      {/* ---------- MISSION & VALUES ---------- */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">Sustainability First</h2>
-          <p className="text-sm text-gray-700">
-            We believe in eco-friendly craftsmanship sourcing responsibly and using recyclable packaging.
+    <div className="min-h-screen bg-[#fcfbf8]">
+      {/* Hero Section */}
+      <div className="relative bg-[#2c3e50] text-white py-20 text-center overflow-hidden">
+        <div className="absolute inset-0 bg-black/10"></div>
+        <div className="relative z-10 px-4">
+          <h1 className="text-4xl md:text-5xl font-serif mb-4">Get in Touch</h1>
+          <p className="text-lg opacity-80 font-light max-w-2xl mx-auto">
+            We'd love to hear from you. Whether you have a question about our jewelry, pricing, or anything else, our team is ready to answer all your questions.
           </p>
         </div>
-        <div className="bg-white p-6 rounded-xl shadow hover:shadow-md transition">
-          <h2 className="text-xl font-semibold text-gray-800 mb-2">Timeless Craftsmanship</h2>
-          <p className="text-sm text-gray-700">
-            Designed to last a lifetime, our pieces are hypoallergenic, waterproof, and made for everyday luxury.
-          </p>
-        </div>
-      </section>
+      </div>
 
-      {/* ---------- TEAM ---------- */}
-      <section className="mb-16">
-        <h2 className="text-3xl font-semibold text-center text-gray-900 mb-8">
-          Meet Our Team
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-center">
-          <div className="p-6 bg-gray-50 rounded-xl shadow hover:shadow-md transition">
-            <h3 className="text-lg font-semibold text-gray-800">Nitesh Sharma</h3>
-            <p className="text-sm text-gray-600">CEO & Founder</p>
-            <p className="mt-2 text-xs italic text-gray-500">
-              “Jewelry should make you shine, not just sparkle.”
-            </p>
+      <div className="max-w-7xl mx-auto px-4 py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
+
+          {/* Contact Information */}
+          <div className="space-y-12">
+            <div>
+              <h2 className="text-2xl font-serif text-[#2c3e50] mb-6">Contact Information</h2>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-50 p-3 rounded-full text-[#2c3e50]">
+                    <FaEnvelope />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-[#2c3e50]">Email</h3>
+                    <p className="text-gray-500 text-sm">Our friendly team is here to help.</p>
+                    <a href="mailto:support@yelosoul.com" className="text-[#2c3e50] font-medium hover:underline mt-1 block">
+                      yelosoulstore@gmail.com
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-50 p-3 rounded-full text-[#2c3e50]">
+                    <FaMapMarkerAlt />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-[#2c3e50]">Office</h3>
+                    <p className="text-gray-500 text-sm">Come say hello at our office HQ.</p>
+                    <p className="text-[#2c3e50] font-medium mt-1">
+                      Nangloi, New Delhi, India
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-blue-50 p-3 rounded-full text-[#2c3e50]">
+                    <FaPhoneAlt />
+                  </div>
+                  <div>
+                    <h3 className="font-medium text-[#2c3e50]">Phone</h3>
+                    <p className="text-gray-500 text-sm">Mon - Sat (10 AM - 6 PM IST)</p>
+                    <p className="text-[#2c3e50] font-medium mt-1">
+                      +91 9667175620
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Socials */}
+            <div>
+              <h2 className="text-xl font-serif text-[#2c3e50] mb-4">Follow Us</h2>
+              <div className="flex gap-4">
+                <a href="https://www.instagram.com/yelosoulstore_?igsh=ZW1rMDQ4MjQzMXFs" target="_blank" rel="noreferrer" className="w-10 h-10 bg-white shadow-sm flex items-center justify-center rounded-full text-pink-500 hover:bg-pink-50 transition-colors">
+                  <FaInstagram size={20} />
+                </a>
+                <a href="https://linkedin.com/company/yelosoul" target="_blank" rel="noreferrer" className="w-10 h-10 bg-white shadow-sm flex items-center justify-center rounded-full text-blue-600 hover:bg-blue-50 transition-colors">
+                  <FaLinkedin size={20} />
+                </a>
+                <a href="https://wa.me/919667175620?text=Hi%20YeloSoul%20Team" target="_blank" rel="noreferrer" className="w-10 h-10 bg-white shadow-sm flex items-center justify-center rounded-full text-green-500 hover:bg-green-50 transition-colors">
+                  <FaWhatsapp size={20} />
+                </a>
+              </div>
+            </div>
           </div>
-          <div className="p-6 bg-gray-50 rounded-xl shadow hover:shadow-md transition">
-            <h3 className="text-lg font-semibold text-gray-800">Raman Sharma</h3>
-            <p className="text-sm text-gray-600">Operations Manager & Developer</p>
-            <p className="mt-2 text-xs italic text-gray-500">
-              “Great service is as important as great jewelry.”
-            </p>
+
+          {/* Inquiry Form */}
+          <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100">
+            <h2 className="text-2xl font-serif text-[#2c3e50] mb-6">Send us a message</h2>
+            <form className="space-y-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
+                  <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2c3e50] focus:ring-1 focus:ring-[#2c3e50] outline-none transition-all" placeholder="Jane" />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                  <input type="text" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2c3e50] focus:ring-1 focus:ring-[#2c3e50] outline-none transition-all" placeholder="Doe" />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                <input type="email" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2c3e50] focus:ring-1 focus:ring-[#2c3e50] outline-none transition-all" placeholder="jane@example.com" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Message</label>
+                <textarea rows="4" className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-[#2c3e50] focus:ring-1 focus:ring-[#2c3e50] outline-none transition-all resize-none" placeholder="Tell us how we can help..."></textarea>
+              </div>
+
+              <button type="submit" className="w-full bg-[#2c3e50] text-white py-4 rounded-xl hover:bg-[#1a252f] transition-all shadow-md font-medium">
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
-      </section>
 
-      {/* ---------- CONTACT US ---------- */}
-      <section>
-        <h2 className="text-3xl font-semibold text-center text-gray-900 mb-6">
-          Contact Us
-        </h2>
-        <p className="text-center text-sm text-gray-700 max-w-md mx-auto mb-6">
-          Have a question or collaboration idea? We’d love to hear from you.
-        </p>
-
-        {/* Contact Info */}
-        <div className="text-center text-sm text-gray-700 space-y-2 mb-6">
-          <p>
-            Email:{" "}
-            <a
-              href="mailto:support@yelosoul.com"
-              className="text-blue-500 hover:underline"
-            >
-              yelosoulstore@gmail.com
-            </a>
-          </p>
-          <p> Phone: +91 9667175620</p>
-          <p> Mon - Sat (10 AM - 6 PM IST)</p>
-          <p> Nangloi, New Delhi, India</p>
+        {/* Brand Story Section - Simplified and Integrated */}
+        <div className="mt-20 pt-16 border-t border-gray-200">
+          <div className="text-center max-w-3xl mx-auto">
+            <h2 className="text-3xl font-serif text-[#2c3e50] mb-6">About YeloSoul</h2>
+            <p className="text-gray-600 leading-relaxed mb-8">
+              YeloSoul isn’t just jewelry it’s <strong className="text-[#2c3e50]">timeless elegance</strong> crafted sustainably. Every piece is designed to empower you while respecting the planet. We believe in eco-friendly craftsmanship and sourcing responsibly.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left mt-12">
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-50">
+                <h3 className="font-serif text-lg text-[#2c3e50] mb-2">Nitesh Sharma</h3>
+                <p className="text-xs text-blue-500 font-medium uppercase tracking-wider mb-2">CEO & Founder</p>
+                <p className="text-gray-500 text-sm italic">“Jewelry should make you shine, not just sparkle.”</p>
+              </div>
+              <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-50">
+                <h3 className="font-serif text-lg text-[#2c3e50] mb-2">Raman Sharma</h3>
+                <p className="text-xs text-blue-500 font-medium uppercase tracking-wider mb-2">Operations</p>
+                <p className="text-gray-500 text-sm italic">“Great service is as important as great jewelry.”</p>
+              </div>
+            </div>
+          </div>
         </div>
-
-        {/* Social Logos */}
-        <div className="flex justify-center space-x-6 mt-4 text-2xl">
-          <a
-            href="https://www.instagram.com/yelosoulstore_?igsh=ZW1rMDQ4MjQzMXFs"
-            target="_blank"
-            className="text-pink-400 hover:scale-110 transition"
-          >
-            <FaInstagram />
-          </a>
-          <a
-            href="https://linkedin.com/company/yelosoul"
-            target="_blank"
-            className="text-blue-500 hover:scale-110 transition"
-          >
-            <FaLinkedin />
-          </a>
-          <a
-            href="https://wa.me/919667175620?text=Hi%20YeloSoul%20Team"
-            target="_blank"
-            className="text-green-500 hover:scale-110 transition"
-          >
-            <FaWhatsapp />
-          </a>
-        </div>
-      </section>
+      </div>
     </div>
   );
 }

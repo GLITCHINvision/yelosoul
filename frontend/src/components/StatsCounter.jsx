@@ -15,35 +15,42 @@ export default function StatsCounter() {
       //  Get the latest order for live ticker
       const allOrders = JSON.parse(localStorage.getItem("orders") || "[]");
       if (allOrders.length > 0) {
-        const latest = allOrders[0];
-        setRecentOrder(latest);
+        setRecentOrder(allOrders[0]);
       }
     };
 
     updateStats();
-    const interval = setInterval(updateStats, 2000); // updates every 2s
+    const interval = setInterval(updateStats, 5000); // Polling every 5s is sufficient
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <div className="flex flex-col items-start text-xs text-[#4a8577]">
-      {/*  Orders & Visits Counter */}
-      <div
-        onClick={() => navigate("/admin-stats")}
-        className="bg-[#fef3e6] px-3 py-1 rounded cursor-pointer hover:bg-[#fde8d6] transition"
-      >
-        <strong>📊 {orders}</strong> Orders | <strong>👀 {visitors}</strong> Visits
-      </div>
+  // Only show if there is data to show, to keep it minimal
+  if (orders === 0 && visitors === 0) return null;
 
-      {/*  Recent Customer Activity Ticker */}
+  return (
+    <div className="fixed bottom-4 left-4 z-40 flex flex-col items-start gap-2">
+      {/*  Admin Shortcut Pill */}
+      <button
+        onClick={() => navigate("/admin-stats")}
+        className="bg-white/90 backdrop-blur shadow-lg border border-gray-100 px-4 py-2 rounded-full text-xs font-medium text-[#2c3e50] hover:scale-105 transition-transform flex items-center gap-3"
+      >
+        <span className="flex items-center gap-1">
+          <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+          {visitors} Visits
+        </span>
+        <span className="w-[1px] h-3 bg-gray-200"></span>
+        <span>{orders} Orders</span>
+      </button>
+
+      {/*  Recent Sale Pop-up Notification */}
       {recentOrder && (
-        <div className="mt-1 text-[#4a8577] animate-pulse">
-          🛍 <strong>{recentOrder.items?.[0]?.name || "A customer"}</strong> just
-          ordered for ₹{recentOrder.total}!
+        <div className="animate-in slide-in-from-bottom-2 fade-in duration-700 bg-[#2c3e50] text-white px-4 py-3 rounded-xl shadow-xl max-w-xs text-xs">
+          <p className="font-medium mb-1">🛍 Just Purchased!</p>
+          <p className="opacity-90">
+            Someone ordered <span className="font-semibold">{recentOrder.items?.[0]?.name || "Jewelry"}</span>
+          </p>
         </div>
       )}
     </div>
   );
 }
-
-

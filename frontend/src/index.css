@@ -2,78 +2,163 @@
 @import "tailwindcss/utilities";
 @import "tailwindcss/theme";
 
-/* ✅ Custom Theme Colors */
+/* ✅ Custom Theme Colors & Fonts */
 :root {
-  --color-primary: #c4a287;
+  --font-serif: 'Playfair Display', serif;
+  --font-sans: 'Lato', sans-serif;
+
+  --color-primary: #1a1a1a;
+  /* Rich Black */
+  --color-secondary: #c4a287;
+  /* Muted Gold/Beige */
+  --color-accent: #f4f1ea;
+  /* Cream/Off-white background */
+  --color-text: #2d2d2d;
+  /* Dark charcoal for text */
 }
 
-/* ✅ Tailwind + Custom Colors */
-.text-primary {
-  color: var(--color-primary);
-}
-
-.bg-primary {
-  background-color: var(--color-primary);
-}
-
-/* ✅ Global Gen-Z Vibes */
+/* ✅ Typography Overrides */
 body {
-  font-family: 'Inter', sans-serif; /* modern clean font */
-  background-color: #f9fafb; /* Tailwind's gray-50 */
-  color: #374151; /* Tailwind's gray-700 */
+  font-family: var(--font-sans);
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* ✅ Reusable Card Styling */
-.card {
-  background-color: white;
-  border-radius: 0.75rem; /* rounded-xl */
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* soft shadow */
-  padding: 1rem;
-  transition: all 0.3s ease-in-out;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-serif);
+  font-weight: 500;
 }
 
-.card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transform: translateY(-3px);
+/* ✅ Utility Classes */
+.font-serif {
+  font-family: var(--font-serif);
 }
 
-/* ✅ Primary Button */
-.btn-primary {
-  background-color: var(--color-primary);
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  transition: opacity 0.3s ease-in-out, transform 0.2s ease-in-out;
+.font-sans {
+  font-family: var(--font-sans);
 }
 
-.btn-primary:hover {
-  opacity: 0.9;
-  transform: scale(1.03);
+.text-gold {
+  color: var(--color-secondary);
 }
 
-/* ✅ Animation (Optional) */
-@keyframes fade-in {
+.bg-gold {
+  background-color: var(--color-secondary);
+}
+
+/* ✅ Glassmorphism helpers */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.glass-dark {
+  background: rgba(20, 20, 20, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* ✅ Animations */
+@keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 0.8s ease-in-out;
+@keyframes zoomIn {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.1);
+  }
 }
 
+.animate-fadeIn {
+  animation: fadeIn 1s ease-out forwards;
+}
 
+@keyframes slideIn {
+  from {
+    width: 0;
+  }
 
+  to {
+    width: 100%;
+  }
+}
 
+.hover-underline-animation {
+  display: inline-block;
+  position: relative;
+}
 
+.hover-underline-animation::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.4s ease-out;
+}
 
+.hover-underline-animation:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
 
+/* ✅ UI Elements */
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #fff;
+  padding: 0.75rem 2rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.8rem;
+  transition: all 0.3s ease;
+  border: 1px solid var(--color-primary);
+}
 
+.btn-primary:hover {
+  background-color: transparent;
+  color: var(--color-primary);
+}
 
+/* Customize scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
 
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
 
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}

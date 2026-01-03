@@ -1,20 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useCart } from "../context/CartContext";
+import ProductCard from "../components/ProductCard";
 
 const OccasionPage = () => {
   const [occasions, setOccasions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedImage, setSelectedImage] = useState(null);
-  const navigate = useNavigate();
-  const { addToCart } = useCart();
+  const [activeTab, setActiveTab] = useState("");
+  const sectionRefs = useRef({});
 
   useEffect(() => {
     const fetchOccasions = async () => {
       try {
         const { data } = await axios.get("http://localhost:5000/api/occasions");
-        setOccasions(Array.isArray(data.occasions) ? data.occasions : []);
+        const occasionsData = Array.isArray(data.occasions) ? data.occasions : [];
+        setOccasions(occasionsData);
+        if (occasionsData.length > 0) {
+          setActiveTab(occasionsData[0]._id);
+        }
       } catch (error) {
         console.error(" Error fetching occasions:", error);
         setOccasions([]);
@@ -25,107 +27,120 @@ const OccasionPage = () => {
     fetchOccasions();
   }, []);
 
-  const handleShopNow = (product) => {
-    if (!product?._id) {
-      alert(" Product is not linked properly. Please refresh.");
-      return;
-    }
-    addToCart(product, 1);
-    navigate("/cart");
-  };
+  // Scroll to section when tab is clicked
+  const scrollToSection = (id) => {
+    setActiveTab(id);
+    const element = sectionRefs.current[id];
+    if (element) {
+      const offset = 150; // Offset for sticky header
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - offset;
 
-  const closeModal = () => setSelectedImage(null);
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-[50vh] bg-[#faf9f7]">
-        <p className="text-lg text-[#6b5e4a] animate-pulse">
-          Curating beautiful gifts for you...
-        </p>
+      <div className="flex justify-center items-center min-h-[60vh] bg-[#fcfbf8]">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-[#2c3e50] border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-lg text-[#2c3e50] animate-pulse tracking-wide font-serif">
+            Curating collections...
+          </p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="px-4 sm:px-8 md:px-12 py-10 bg-[#faf9f7] min-h-screen">
-      <h1 className="text-3xl md:text-4xl font-semibold text-center text-[#5a4d3b] mb-10 tracking-wide">
-        Shop by Occasion
-      </h1>
+    <div className="min-h-screen bg-[#fcfbf8]">
+      {/* Hero Section */}
+      <div className="relative bg-[#fcfbf8] text-[#2c3e50] overflow-hidden mb-8 border-b border-[#f0f0f0]">
+        <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+        <div className="relative px-6 py-20 md:py-24 text-center">
+          <h1 className="text-4xl md:text-6xl font-serif text-[#1a1a1a] mb-4">
+            Shop by Occasion
+          </h1>
+          <p className="text-lg md:text-xl opacity-70 font-light tracking-widest uppercase max-w-2xl mx-auto">
+            Thoughtful gifts for every special moment
+          </p>
+        </div>
+      </div>
 
       {occasions.length === 0 ? (
-        <p className="text-center text-gray-500 text-sm">
-          No occasions available right now. Check back soon!
-        </p>
+        <div className="text-center py-20">
+          <p className="text-gray-500 text-lg font-light">
+            No occasions available right now. Check back soon!
+          </p>
+        </div>
       ) : (
-        <div className="space-y-14">
-          {occasions.map((occasion) => (
-            <div key={occasion._id} className="space-y-5">
-              <div className="text-center">
-                <h2 className="text-2xl font-semibold text-[#6b5e4a]">{occasion.name}</h2>
-                <p className="text-sm text-gray-500">{occasion.description}</p>
+        <>
+          {/* Sticky Navigation Tabs */}
+          <div className="sticky top-[70px] z-30 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 mb-12">
+            <div className="max-w-7xl mx-auto px-4">
+              <div className="flex overflow-x-auto scrollbar-hide py-4 gap-4 md:justify-center">
+                {occasions.map((occasion) => (
+                  <button
+                    key={occasion._id}
+                    onClick={() => scrollToSection(occasion._id)}
+                    className={`whitespace-nowrap px-6 py-2 rounded-full text-sm uppercase tracking-wider transition-all duration-300 ${activeTab === occasion._id
+                        ? "bg-[#2c3e50] text-white shadow-md transform scale-105"
+                        : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                      }`}
+                  >
+                    {occasion.name}
+                  </button>
+                ))}
               </div>
-
-              {occasion.products?.length > 0 ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-                  {occasion.products.map((product) => (
-                    <div
-                      key={product._id}
-                      className="bg-white rounded-2xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 p-4 text-center"
-                    >
-                      <div
-                        className="cursor-pointer"
-                        onClick={() => setSelectedImage(product.image)}
-                      >
-                        <img
-                          src={product.image || "/placeholder.jpg"}
-                          alt={product.name}
-                          className="w-full h-52 object-cover rounded-xl mb-3 transition duration-300 hover:opacity-90"
-                        />
-                      </div>
-                      <h3 className="text-base font-semibold text-[#4e4437] truncate">{product.name}</h3>
-                      <p className="text-sm text-gray-500 mb-3">₹{product.price}</p>
-                      <button
-                        onClick={() => handleShopNow(product)}
-                        className="bg-[#e9dfd1] text-[#4e4437] text-sm px-4 py-2 rounded-full hover:bg-[#d8cbb8] transition"
-                      >
-                        Add to Cart
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <p className="text-center text-gray-400 text-sm">
-                  No products for this occasion yet.
-                </p>
-              )}
             </div>
-          ))}
-        </div>
-      )}
+          </div>
 
-      {/* Fullscreen Image Modal */}
-      {selectedImage && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
-          onClick={closeModal}
-        >
-          <img
-            src={selectedImage}
-            alt="Full View"
-            className="max-w-full max-h-full rounded-lg shadow-lg transition duration-300"
-          />
-        </div>
+          {/* Occasion Sections */}
+          <div className="max-w-7xl mx-auto px-4 pb-20 space-y-24">
+            {occasions.map((occasion) => (
+              <div
+                key={occasion._id}
+                ref={(el) => (sectionRefs.current[occasion._id] = el)}
+                className="scroll-mt-32"
+              >
+                {/* Section Header */}
+                <div className="text-center mb-10">
+                  <h2 className="text-3xl md:text-4xl font-serif text-[#2c3e50] mb-3 relative inline-block">
+                    {occasion.name}
+                    <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[#e0e0e0] rounded-full"></span>
+                  </h2>
+                  {occasion.description && (
+                    <p className="text-gray-500 font-light max-w-2xl mx-auto mt-4">
+                      {occasion.description}
+                    </p>
+                  )}
+                </div>
+
+                {/* Product Grid */}
+                {occasion.products?.length > 0 ? (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                    {occasion.products.map((product) => (
+                      <ProductCard key={product._id} product={product} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="bg-gray-50 rounded-xl p-10 text-center border border-dashed border-gray-200">
+                    <p className="text-gray-400 font-light">
+                      Collections for this occasion are being curated.
+                    </p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </>
       )}
     </div>
   );
 };
 
 export default OccasionPage;
-
-
-
-
-
-
-
-

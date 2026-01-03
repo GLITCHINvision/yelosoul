@@ -1,13 +1,14 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ShoppingBag, Heart, User, LogOut } from "lucide-react";
 
 export default function Navbar() {
   const { cart } = useCart();
   const navigate = useNavigate();
   const [currentUser, setCurrentUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("currentUser"));
@@ -16,6 +17,13 @@ export default function Navbar() {
     // Count visitors
     const totalVisitors = parseInt(localStorage.getItem("totalVisitors") || "0");
     localStorage.setItem("totalVisitors", totalVisitors + 1);
+
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLogout = () => {
@@ -27,107 +35,108 @@ export default function Navbar() {
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
 
+  // Dynamic text color checking
+  // For White Hero, we generally want Dark Text.
+  // However, if we want to be safe, we can use Dark Text always.
+  const textColor = "text-[#2c3e50]";
+  const hoverColor = "hover:text-gray-600";
+
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <nav
+      className={`sticky top-0 w-full z-50 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm py-4`}
+    >
+      <div className="max-w-7xl mx-auto px-4 flex justify-between items-center">
         {/*  Brand */}
-        <Link to="/" className="text-2xl font-bold text-primary tracking-wide">
+        <Link to="/" className={`text-3xl font-serif tracking-tight transition-colors ${textColor}`}>
           YeloSoul
         </Link>
 
         {/*  Hamburger for mobile */}
         <div className="md:hidden">
-          <button onClick={toggleMenu} aria-label="Toggle Menu">
-            {menuOpen ? <X size={24} /> : <Menu size={24} />}
+          <button onClick={toggleMenu} aria-label="Toggle Menu" className={`transition-colors ${textColor}`}>
+            {menuOpen ? <X size={24} className="text-[#2c3e50]" /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Navigation */}
         <div
-          className={`${
-            menuOpen ? "block" : "hidden"
-          } absolute md:static top-16 left-0 w-full md:w-auto bg-white md:bg-transparent md:flex items-center md:space-x-6 text-sm font-medium transition-all`}
+          className={`${menuOpen ? "absolute top-full left-0 w-full bg-white shadow-lg flex flex-col p-6 space-y-4" : "hidden"
+            } md:static md:flex md:items-center md:space-x-8 md:bg-transparent md:shadow-none md:p-0 md:space-y-0 text-sm font-medium transition-all`}
         >
-          <div className="flex flex-col md:flex-row md:items-center w-full md:w-auto space-y-4 md:space-y-0 md:space-x-6 px-6 md:px-0 py-4 md:py-0 border-t md:border-none">
-
-            <Link to="/" onClick={() => setMenuOpen(false)} className="text-gray-700 hover:text-primary">
+          {/* Main Links */}
+          <div className={`flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-8 transition-colors ${menuOpen ? "text-[#2c3e50]" : textColor}`}>
+            <Link to="/" onClick={() => setMenuOpen(false)} className={`${hoverColor} transition-colors`}>
               Home
             </Link>
-
-            {currentUser && (
-              <Link to="/my-orders" onClick={() => setMenuOpen(false)} className="text-gray-700 hover:text-primary">
-                My Orders
-              </Link>
-            )}
-
-            <Link to="/wishlist" onClick={() => setMenuOpen(false)} className="text-gray-700 hover:text-primary">
-              Wishlist
-            </Link>
-
             <Link
               to="/occasions"
               onClick={() => setMenuOpen(false)}
-              className="px-3 py-1 bg-[#f5e7da] text-[#5a4d3b] rounded-lg hover:bg-[#e7d8c9] transition-all"
+              className={`${hoverColor} transition-colors`}
             >
               Shop by Occasion
             </Link>
+            <Link
+              to="/return-policy"
+              onClick={() => setMenuOpen(false)}
+              className={`${hoverColor} transition-colors`}
+            >
+              Policy
+            </Link>
+          </div>
+
+          {/* Right Side Icons/Actions */}
+          <div className="flex flex-col md:flex-row md:items-center space-y-4 md:space-y-0 md:space-x-6 border-t md:border-none pt-4 md:pt-0 mt-2 md:mt-0">
+
+            {/* Wishlist */}
+            <Link to="/wishlist" onClick={() => setMenuOpen(false)} className={`relative hover:scale-110 transition-transform ${menuOpen ? "text-[#2c3e50]" : textColor}`}>
+              <Heart size={20} />
+            </Link>
 
             {/*  Cart */}
-            <Link
-              to="/cart"
-              onClick={() => setMenuOpen(false)}
-              className="relative text-gray-700 hover:text-primary"
-            >
-              🛒
+            <Link to="/cart" onClick={() => setMenuOpen(false)} className={`relative hover:scale-110 transition-transform ${menuOpen ? "text-[#2c3e50]" : textColor}`}>
+              <ShoppingBag size={20} />
               {cart.length > 0 && (
-                <span className="absolute -top-2 -right-3 bg-primary text-white text-xs rounded-full px-2">
+                <span className={`absolute -top-1.5 -right-1.5 bg-[#2c3e50] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center`}>
                   {cart.length}
                 </span>
               )}
             </Link>
 
-            {/*  Admin Panel */}
-            {currentUser?.isAdmin && (
-              <Link
-                to="/admin-orders"
-                onClick={() => setMenuOpen(false)}
-                className="bg-yellow-100 text-yellow-800 px-3 py-1 rounded hover:bg-yellow-200"
-              >
-                Orders Panel
-              </Link>
-            )}
-
-            {/*  Auth Buttons */}
+            {/*  Auth / Profile */}
             {!currentUser ? (
-              <>
-                <Link
-                  to="/login"
-                  onClick={() => setMenuOpen(false)}
-                  className="bg-primary text-white px-4 py-1.5 rounded hover:opacity-90"
-                >
-                  Login
-                </Link>
-                <Link
-                  to="/signup"
-                  onClick={() => setMenuOpen(false)}
-                  className="bg-gray-100 text-gray-700 px-4 py-1.5 rounded hover:bg-gray-200"
-                >
-                  Signup
-                </Link>
-              </>
+              <Link
+                to="/login"
+                onClick={() => setMenuOpen(false)}
+                className={`px-5 py-2 rounded-full text-xs font-semibold transition-all shadow-md text-center bg-[#2c3e50] text-white hover:bg-[#1a252f]`}
+              >
+                Login
+              </Link>
             ) : (
-              <div className="flex flex-col md:flex-row items-start md:items-center space-y-2 md:space-y-0 md:space-x-3">
-                <span className="text-gray-700">
-                  Hi, <strong>{currentUser.name}</strong>
-                </span>
+              <div className="flex items-center gap-4">
+                {/*  Admin Panel Link */}
+                {currentUser?.isAdmin && (
+                  <Link
+                    to="/admin-orders"
+                    onClick={() => setMenuOpen(false)}
+                    className="text-xs font-semibold bg-yellow-50 text-yellow-700 px-3 py-1 rounded-full border border-yellow-200"
+                  >
+                    Admin
+                  </Link>
+                )}
+
+                <Link to="/my-orders" onClick={() => setMenuOpen(false)} className={`hover:scale-110 transition-transform ${menuOpen ? "text-[#2c3e50]" : textColor}`} title="My Orders">
+                  <User size={20} />
+                </Link>
+
                 <button
                   onClick={() => {
                     setMenuOpen(false);
                     handleLogout();
                   }}
-                  className="bg-red-500 text-white px-3 py-1 rounded hover:opacity-90"
+                  className="text-red-400 hover:text-red-600 hover:scale-110 transition-all"
+                  title="Logout"
                 >
-                  Logout
+                  <LogOut size={20} />
                 </button>
               </div>
             )}
@@ -137,8 +146,3 @@ export default function Navbar() {
     </nav>
   );
 }
-
-
-
-
-
