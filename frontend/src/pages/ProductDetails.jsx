@@ -137,8 +137,8 @@ export default function ProductDetails() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20">
 
           {/* LEFT: IMAGE GALLERY */}
-          <div className="space-y-6">
-            <div className="bg-white rounded-3xl overflow-hidden shadow-sm aspect-[4/5] lg:aspect-square relative group">
+          <div className="space-y-4 md:space-y-6">
+            <div className="bg-white rounded-2xl md:rounded-3xl overflow-hidden shadow-sm aspect-[4/5] md:aspect-square relative group">
               <img
                 src={images[current] || "/placeholder.jpg"}
                 alt={product.name}
@@ -147,12 +147,12 @@ export default function ProductDetails() {
             </div>
             {/* Thumbnails */}
             {images.length > 1 && (
-              <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
+              <div className="flex gap-3 md:gap-4 overflow-x-auto pb-4 scrollbar-hide">
                 {images.map((src, idx) => (
                   <button
                     key={idx}
                     onClick={() => setCurrent(idx)}
-                    className={`relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden border-2 transition-all ${idx === current ? "border-[#2c3e50] opacity-100" : "border-transparent opacity-60 hover:opacity-100"
+                    className={`relative w-16 h-16 md:w-24 md:h-24 flex-shrink-0 rounded-lg md:rounded-xl overflow-hidden border-2 transition-all ${idx === current ? "border-[#2c3e50] opacity-100" : "border-transparent opacity-60 hover:opacity-100"
                       }`}
                   >
                     <img src={src} className="w-full h-full object-cover" />
@@ -182,12 +182,22 @@ export default function ProductDetails() {
               </p>
             </div>
 
-            {/* Actions */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            {/* Actions - Desktop */}
+            <div className="hidden md:flex flex-row gap-4 mb-12">
               <button onClick={handleAddToCart} className="flex-1 bg-white text-[#2c3e50] border border-[#2c3e50] py-4 rounded-xl hover:bg-gray-50 transition-colors font-medium text-lg">
                 Add to Cart
               </button>
               <button onClick={handleBuyNow} className="flex-1 bg-[#2c3e50] text-white py-4 rounded-xl hover:bg-[#1a252f] transition-all shadow-lg hover:shadow-xl font-medium text-lg">
+                Buy Now
+              </button>
+            </div>
+
+            {/* Sticky Actions - Mobile */}
+            <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/80 backdrop-blur-lg border-t border-gray-100 p-4 z-40 flex gap-3 shadow-[0_-4px_20px_-10px_rgba(0,0,0,0.1)]">
+              <button onClick={handleAddToCart} className="flex-1 bg-white text-[#2c3e50] border border-[#2c3e50] py-3 rounded-xl font-medium text-sm">
+                Add to Cart
+              </button>
+              <button onClick={handleBuyNow} className="flex-[1.5] bg-[#2c3e50] text-white py-3 rounded-xl font-medium text-sm shadow-md">
                 Buy Now
               </button>
             </div>

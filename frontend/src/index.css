@@ -127,6 +127,96 @@ h6 {
   transform-origin: bottom left;
 }
 
+/* ✅ Aurora Motion Background */
+@keyframes aurora-1 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(5%, 5%) scale(1.1);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes aurora-2 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(-5%, 8%) scale(1.2);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+@keyframes aurora-3 {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+
+  50% {
+    transform: translate(8%, -5%) scale(1.1);
+  }
+
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+}
+
+.aurora-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: #fbfbf9;
+  /* Slightly warmer base */
+}
+
+.aurora-blob {
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.12;
+}
+
+.aurora-1 {
+  top: -10%;
+  left: -10%;
+  background: #c4a287;
+  /* Gold accent */
+  animation: aurora-1 25s infinite alternate ease-in-out;
+}
+
+.aurora-2 {
+  bottom: -10%;
+  right: -5%;
+  background: #2c3e50;
+  /* Primary dark */
+  animation: aurora-2 30s infinite alternate ease-in-out;
+  opacity: 0.08;
+}
+
+.aurora-3 {
+  top: 20%;
+  right: 10%;
+  background: #d4c4b5;
+  /* Soft beige */
+  animation: aurora-3 22s infinite alternate ease-in-out;
+}
+
 /* ✅ UI Elements */
 .btn-primary {
   background-color: var(--color-primary);

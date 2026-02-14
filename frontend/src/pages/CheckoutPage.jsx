@@ -154,7 +154,7 @@ export default function CheckoutPage() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
           {/* Shipping Form */}
           <div className="lg:col-span-7">
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100">
+            <div className="bg-white p-5 md:p-8 rounded-2xl md:rounded-3xl shadow-sm border border-gray-100">
               <h2 className="text-xl font-serif text-[#2c3e50] mb-6">Shipping Address</h2>
               <form onSubmit={handleOrder} className="space-y-6">
                 <div>
@@ -211,7 +211,7 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-5">
-            <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 sticky top-24">
+            <div className="bg-white p-5 md:p-8 rounded-2xl md:rounded-3xl shadow-sm border border-gray-100 sticky top-24">
               <h2 className="text-xl font-serif text-[#2c3e50] mb-6">Your Order</h2>
 
               <div className="space-y-4 mb-6 max-h-80 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-200">

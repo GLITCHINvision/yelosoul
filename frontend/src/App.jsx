@@ -44,7 +44,14 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <div className="bg-gray-50 min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative overflow-hidden">
+      {/* Premium Aurora Background */}
+      <div className="aurora-container">
+        <div className="aurora-blob aurora-1"></div>
+        <div className="aurora-blob aurora-2"></div>
+        <div className="aurora-blob aurora-3"></div>
+      </div>
+
       {/*  Navbar always visible */}
       <Navbar />
       <ScrollToTop />

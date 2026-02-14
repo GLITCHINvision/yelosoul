@@ -11,6 +11,8 @@ import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
 import colors from "colors";
 import nodemailer from "nodemailer";
+import compression from "compression";
+import morgan from "morgan";
 
 
 import productRoutes from "./routes/productRoutes.js";
@@ -35,15 +37,16 @@ connectDB();
 
 // CORS Configuration
 const allowedOrigins = [
-  process.env.FRONTEND_URL || "http://localhost:3000",
+  process.env.FRONTEND_URL,
   "http://localhost:5173",
+  "http://localhost:3000",
   "https://api.razorpay.com",
-];
+].filter(Boolean);
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      if (!origin || allowedOrigins.includes(origin)) {
+      if (!origin || allowedOrigins.includes(origin) || process.env.NODE_ENV !== 'production') {
         callback(null, true);
       } else {
         callback(new Error("CORS not allowed for this origin"));
@@ -64,6 +67,13 @@ app.use(
 );
 app.use(mongoSanitize());
 app.use(xss());
+app.use(compression());
+
+if (process.env.NODE_ENV === "production") {
+  app.use(morgan("combined"));
+} else {
+  app.use(morgan("dev"));
+}
 
 
 const apiLimiter = rateLimit({
@@ -166,6 +176,21 @@ app.post("/api/send-return", async (req, res) => {
     });
   }
 });
+
+// Production Static Serving
+if (process.env.NODE_ENV === "production") {
+  const distPath = path.join(__dirname, "../frontend/dist");
+  app.use(express.static(distPath));
+
+  // Handle SPA routing
+  app.get(/^(?!\/api).*/, (req, res) => {
+    res.sendFile(path.join(distPath, "index.html"));
+  });
+} else {
+  app.get("/", (req, res) => {
+    res.send("API is running...");
+  });
+}
 
 
 app.all("/api/*", (req, res) => {

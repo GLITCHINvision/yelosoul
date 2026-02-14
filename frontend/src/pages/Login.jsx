@@ -69,11 +69,11 @@ export default function Login() {
       </div>
 
       {/* Right Side - Form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center p-8 bg-white">
+      <div className="w-full lg:w-1/2 flex items-center justify-center p-6 md:p-8 bg-white">
         <div className="max-w-md w-full">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-serif text-[#2c3e50] mb-2">Welcome Back</h2>
-            <p className="text-gray-500">Sign in to continue to your account</p>
+          <div className="text-center mb-8 md:mb-10">
+            <h2 className="text-2xl md:text-3xl font-serif text-[#2c3e50] mb-2">Welcome Back</h2>
+            <p className="text-gray-500 text-sm">Sign in to continue to your account</p>
           </div>
 
           <form onSubmit={handleLogin} className="space-y-6">

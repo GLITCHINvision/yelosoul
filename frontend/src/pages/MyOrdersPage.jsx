@@ -69,8 +69,8 @@ export default function MyOrdersPage() {
       <div className="max-w-4xl mx-auto">
         <div className="flex justify-between items-end mb-8">
           <div>
-            <h1 className="text-3xl font-serif text-[#2c3e50] mb-2">My Orders</h1>
-            <p className="text-gray-500">Track and manage your purchases</p>
+            <h1 className="text-2xl md:text-3xl font-serif text-[#2c3e50] mb-1">My Orders</h1>
+            <p className="text-gray-500 text-xs md:text-sm">Track and manage your purchases</p>
           </div>
           <button onClick={fetchOrders} className="text-sm text-[#2c3e50] underline hover:text-black">Refresh</button>
         </div>
@@ -96,9 +96,9 @@ export default function MyOrdersPage() {
             </Link>
           </div>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {orders.map((order) => (
-              <div key={order._id} className="bg-white p-6 md:p-8 rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
+              <div key={order._id} className="bg-white p-5 md:p-8 rounded-2xl md:rounded-3xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300">
 
                 {/* Header */}
                 <div className="flex flex-wrap justify-between items-start gap-4 mb-6 border-b border-gray-50 pb-6">

@@ -48,10 +48,10 @@ export default function CartPage() {
               {cart.map((item) => (
                 <div
                   key={item._id}
-                  className="group flex flex-col sm:flex-row items-center bg-white p-6 rounded-2xl shadow-sm border border-gray-50 hover:shadow-md transition-all duration-300"
+                  className="group flex flex-row items-center bg-white p-3 md:p-6 rounded-xl md:rounded-2xl shadow-sm border border-gray-50 hover:shadow-md transition-all duration-300"
                 >
                   {/* Image */}
-                  <div className="w-full sm:w-32 h-32 flex-shrink-0 bg-gray-50 rounded-xl overflow-hidden mb-4 sm:mb-0">
+                  <div className="w-20 md:w-32 h-20 md:h-32 flex-shrink-0 bg-gray-50 rounded-lg md:rounded-xl overflow-hidden">
                     <img
                       src={item.image}
                       alt={item.name}
@@ -60,37 +60,37 @@ export default function CartPage() {
                   </div>
 
                   {/* Details */}
-                  <div className="flex-1 sm:ml-6 text-center sm:text-left w-full">
-                    <div className="flex flex-col sm:flex-row justify-between items-start">
+                  <div className="flex-1 ml-4 md:ml-6 w-full">
+                    <div className="flex flex-row justify-between items-start">
                       <div>
-                        <h3 className="font-serif text-lg text-[#2c3e50]">{item.name}</h3>
-                        <p className="text-gray-400 text-sm mt-1">{item.category || "Jewelry"}</p>
+                        <h3 className="font-serif text-sm md:text-lg text-[#2c3e50] line-clamp-1">{item.name}</h3>
+                        <p className="text-gray-400 text-[10px] md:text-sm mt-0.5 md:mt-1">{item.category || "Jewelry"}</p>
                       </div>
-                      <p className="font-medium text-[#2c3e50] text-lg mt-2 sm:mt-0">
-                        ₹{item.price.toFixed(2)}
+                      <p className="font-medium text-[#2c3e50] text-sm md:text-lg ml-2">
+                        ₹{item.price.toFixed(0)}
                       </p>
                     </div>
 
-                    <div className="flex items-center justify-between mt-6">
+                    <div className="flex items-center justify-between mt-4 md:mt-6">
                       {/* Quantity */}
-                      <div className="flex items-center bg-gray-50 rounded-full px-4 py-1 border border-gray-100">
+                      <div className="flex items-center bg-gray-50 rounded-full px-3 md:px-4 py-0.5 md:py-1 border border-gray-100">
                         <button
                           onClick={() =>
                             item.quantity > 1 &&
                             updateQuantity(item._id, item.quantity - 1)
                           }
-                          className="text-gray-400 hover:text-[#2c3e50] px-2 transition-colors font-medium text-lg"
+                          className="text-gray-400 hover:text-[#2c3e50] px-1.5 md:px-2 transition-colors font-medium text-base md:text-lg"
                         >
                           −
                         </button>
-                        <span className="w-8 text-center font-medium text-[#2c3e50] text-sm">
+                        <span className="w-6 md:w-8 text-center font-medium text-[#2c3e50] text-xs md:text-sm">
                           {item.quantity}
                         </span>
                         <button
                           onClick={() =>
                             updateQuantity(item._id, item.quantity + 1)
                           }
-                          className="text-gray-400 hover:text-[#2c3e50] px-2 transition-colors font-medium text-lg"
+                          className="text-gray-400 hover:text-[#2c3e50] px-1.5 md:px-2 transition-colors font-medium text-base md:text-lg"
                         >
                           +
                         </button>

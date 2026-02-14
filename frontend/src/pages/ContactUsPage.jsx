@@ -7,8 +7,8 @@ export default function ContactUsPage() {
       <div className="relative bg-[#2c3e50] text-white py-20 text-center overflow-hidden">
         <div className="absolute inset-0 bg-black/10"></div>
         <div className="relative z-10 px-4">
-          <h1 className="text-4xl md:text-5xl font-serif mb-4">Get in Touch</h1>
-          <p className="text-lg opacity-80 font-light max-w-2xl mx-auto">
+          <h1 className="text-3xl md:text-5xl font-serif mb-4">Get in Touch</h1>
+          <p className="text-sm md:text-lg opacity-80 font-light max-w-2xl mx-auto">
             We'd love to hear from you. Whether you have a question about our jewelry, pricing, or anything else, our team is ready to answer all your questions.
           </p>
         </div>
@@ -81,8 +81,8 @@ export default function ContactUsPage() {
           </div>
 
           {/* Inquiry Form */}
-          <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100">
-            <h2 className="text-2xl font-serif text-[#2c3e50] mb-6">Send us a message</h2>
+          <div className="bg-white p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-lg border border-gray-100">
+            <h2 className="text-xl md:text-2xl font-serif text-[#2c3e50] mb-6">Send us a message</h2>
             <form className="space-y-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>

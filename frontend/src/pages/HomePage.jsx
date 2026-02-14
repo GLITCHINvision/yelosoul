@@ -100,7 +100,7 @@ export default function HomePage() {
     <div className="bg-[#fcfbf8] min-h-screen">
 
       {/* 1. HERO SECTION */}
-      <section className="relative h-[85vh] w-full flex items-center justify-center overflow-hidden">
+      <section className="relative h-[70vh] md:h-[85vh] w-full flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
           <img
@@ -113,20 +113,20 @@ export default function HomePage() {
 
         {/* Content */}
         <div className="relative z-10 text-center text-white px-6 max-w-5xl mx-auto animate-fadeIn mt-10">
-          <div className="inline-block border-b border-white/30 pb-2 mb-6">
-            <p className="text-xs md:text-sm tracking-[0.4em] uppercase opacity-90 font-light">
+          <div className="inline-block border-b border-white/30 pb-2 mb-4 md:mb-6">
+            <p className="text-[10px] md:text-sm tracking-[0.4em] uppercase opacity-90 font-light">
               Est. 2024 • Handcrafted in India
             </p>
           </div>
-          <h1 className="text-6xl md:text-8xl font-serif mb-6 leading-tight drop-shadow-lg">
+          <h1 className="text-4xl md:text-8xl font-serif mb-4 md:mb-6 leading-tight drop-shadow-lg">
             Adorn Your Soul
           </h1>
-          <p className="text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto opacity-95 leading-relaxed tracking-wide">
+          <p className="text-sm md:text-xl font-light mb-8 md:mb-10 max-w-2xl mx-auto opacity-95 leading-relaxed tracking-wide px-4">
             Jewelry that speaks to your essence. Minimalist designs curated for the modern muse.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link to="/occasions" className="group bg-white text-[#1a1a1a] px-10 py-4 rounded-none min-w-[200px] font-medium hover:bg-[#f4f1ea] transition-all text-sm tracking-[0.2em] uppercase duration-300">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center px-8 sm:px-0">
+            <Link to="/occasions" className="group bg-white text-[#1a1a1a] px-8 md:px-10 py-3 md:py-4 rounded-none min-w-[180px] font-medium hover:bg-[#f4f1ea] transition-all text-xs tracking-[0.2em] uppercase duration-300">
               Shop Collections
             </Link>
           </div>
@@ -159,39 +159,39 @@ export default function HomePage() {
 
         {/* ⚡ SMART FILTER BAR */}
         {/* ⚡ STANDARD FILTER BAR */}
-        <div className="sticky top-4 z-30 mb-12 bg-[#fcfbf8]/95 backdrop-blur-md py-6 border-y border-gray-100">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 max-w-7xl mx-auto px-6">
+        <div className="sticky top-[72px] z-30 mb-8 md:mb-12 bg-[#fcfbf8]/95 backdrop-blur-md py-4 md:py-6 border-y border-gray-100">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 max-w-7xl mx-auto px-4 md:px-6">
 
             {/* Filter Controls Group */}
-            <div className="flex flex-wrap items-center gap-4 w-full md:w-auto">
+            <div className="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
 
               {/* Category Dropdown */}
-              <div className="relative group">
-                <Filter className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-[#1a1a1a] transition-colors" size={16} />
+              <div className="relative group shrink-0">
+                <Filter className="absolute left-3 md:left-4 top-1/2 -translate-y-1/2 text-gray-400 group-hover:text-[#1a1a1a] transition-colors" size={14} />
                 <select
                   value={selectedCategory}
                   onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="pl-12 pr-10 py-3 bg-white border border-gray-200 text-sm tracking-wide text-[#1a1a1a] focus:ring-0 focus:border-[#c4a287] outline-none appearance-none min-w-[180px] cursor-pointer"
+                  className="pl-9 md:pl-12 pr-8 md:pr-10 py-2.5 md:py-3 bg-white border border-gray-200 text-[10px] md:text-sm tracking-wide text-[#1a1a1a] focus:ring-0 focus:border-[#c4a287] outline-none appearance-none min-w-[130px] md:min-w-[180px] cursor-pointer rounded-none"
                 >
                   {categories.map((cat) => (
                     <option key={cat} value={cat}>{cat}</option>
                   ))}
                 </select>
-                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={14} />
+                <ChevronDown className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={12} />
               </div>
 
               {/* Sort Dropdown */}
-              <div className="relative group">
+              <div className="relative group shrink-0">
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="pl-5 pr-10 py-3 bg-white border border-gray-200 text-sm tracking-wide text-[#1a1a1a] focus:ring-0 focus:border-[#c4a287] outline-none appearance-none min-w-[200px] cursor-pointer"
+                  className="pl-4 md:pl-5 pr-8 md:pr-10 py-2.5 md:py-3 bg-white border border-gray-200 text-[10px] md:text-sm tracking-wide text-[#1a1a1a] focus:ring-0 focus:border-[#c4a287] outline-none appearance-none min-w-[150px] md:min-w-[200px] cursor-pointer rounded-none"
                 >
                   {sortOptions.map((option) => (
                     <option key={option.value} value={option.value}>{option.label}</option>
                   ))}
                 </select>
-                <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={14} />
+                <ChevronDown className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" size={12} />
               </div>
 
             </div>
@@ -200,7 +200,7 @@ export default function HomePage() {
             {(selectedCategory !== "All" || searchTerm) && (
               <button
                 onClick={() => { setSelectedCategory("All"); setSearchTerm(""); }}
-                className="text-xs uppercase tracking-widest text-[#1a1a1a] border-b border-[#1a1a1a] hover:text-[#c4a287] hover:border-[#c4a287] transition-all pb-1"
+                className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#1a1a1a] border-b border-[#1a1a1a] hover:text-[#c4a287] hover:border-[#c4a287] transition-all pb-0.5"
               >
                 Clear Filters
               </button>
@@ -210,7 +210,7 @@ export default function HomePage() {
 
         {/* Product Grid */}
         {filteredProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-16">
+          <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-4 md:gap-x-8 gap-y-10 md:gap-y-16">
             {filteredProducts.slice(0, 12).map((product) => (
               <div key={product._id} className="group fade-in-up">
                 <ProductCard product={product} />

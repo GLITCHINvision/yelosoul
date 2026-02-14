@@ -25,10 +25,10 @@ export default function ProductCard({ product }) {
   return (
     <div
       onClick={handleCardClick}
-      className="group bg-white rounded-2xl border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden relative transform hover:-translate-y-1 cursor-pointer"
+      className="group bg-white rounded-xl md:rounded-2xl border-none shadow-sm hover:shadow-2xl transition-all duration-500 overflow-hidden relative transform hover:-translate-y-1 cursor-pointer"
     >
       {/* Product Image */}
-      <div className="relative overflow-hidden h-80 sm:h-96 w-full bg-[#f9f9f9] flex items-center justify-center">
+      <div className="relative overflow-hidden h-48 sm:h-80 md:h-96 w-full bg-[#f9f9f9] flex items-center justify-center">
         <img
           src={product.image}
           alt={product.name}
@@ -38,10 +38,10 @@ export default function ProductCard({ product }) {
         {/* Wishlist Button */}
         <button
           onClick={handleWishlistClick}
-          className={`absolute top-4 right-4 bg-white/80 backdrop-blur-sm p-3 rounded-full shadow-md z-10 transition-all duration-300
+          className={`absolute top-2 right-2 md:top-4 md:right-4 bg-white/80 backdrop-blur-sm p-2 md:p-3 rounded-full shadow-md z-10 transition-all duration-300
             ${isInWishlist ? "text-red-500 scale-110" : "text-gray-400 hover:text-red-500 hover:scale-110"}`}
         >
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill={isInWishlist ? "currentColor" : "none"} stroke="currentColor">
+          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-5 md:w-5" viewBox="0 0 20 20" fill={isInWishlist ? "currentColor" : "none"} stroke="currentColor">
             {/* If in wishlist, fill heart. If not, just outline stroke */}
             {isInWishlist ? (
               <path fillRule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clipRule="evenodd" />
@@ -56,24 +56,24 @@ export default function ProductCard({ product }) {
       </div>
 
       {/* Product Details */}
-      <div className="p-6 text-center">
-        <h3 className="font-serif text-xl text-[#2c3e50] mb-2 truncate">
+      <div className="p-3 md:p-6 text-center">
+        <h3 className="font-serif text-sm md:text-xl text-[#2c3e50] mb-1 md:mb-2 truncate px-2">
           {product.name}
         </h3>
 
         {/* Price */}
-        <p className="font-light text-[#1a1a1a] text-lg tracking-wide mb-3">
+        <p className="font-light text-[#1a1a1a] text-sm md:text-lg tracking-wide mb-1 md:mb-3">
           ₹{product.price}
         </p>
 
         {/* Rating */}
-        <div className="flex items-center justify-center gap-1 text-yellow-400 text-xs mb-4">
+        <div className="flex items-center justify-center gap-0.5 md:gap-1 text-yellow-400 text-[10px] md:text-xs mb-2 md:mb-4">
           {"★".repeat(Math.ceil(product.rating || 0))}
-          <span className="text-gray-400 ml-1">({product.rating})</span>
+          <span className="text-gray-400 ml-0.5 md:ml-1">({product.rating})</span>
         </div>
 
-        {/* View Details Link (Text only) */}
-        <span className="inline-block text-xs uppercase tracking-widest text-gray-500 border-b border-transparent group-hover:border-gray-500 transition-all pb-1">
+        {/* View Details Link (Text only) - Hidden on mobile to save space if needed, or just small */}
+        <span className="hidden md:inline-block text-xs uppercase tracking-widest text-gray-500 border-b border-transparent group-hover:border-gray-500 transition-all pb-1">
           View Details
         </span>
       </div>

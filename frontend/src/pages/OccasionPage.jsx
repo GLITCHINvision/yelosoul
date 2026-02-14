@@ -59,14 +59,13 @@ const OccasionPage = () => {
 
   return (
     <div className="min-h-screen bg-[#fcfbf8]">
-      {/* Hero Section */}
-      <div className="relative bg-[#fcfbf8] text-[#2c3e50] overflow-hidden mb-8 border-b border-[#f0f0f0]">
+      <div className="relative bg-[#fcfbf8] text-[#2c3e50] overflow-hidden mb-4 md:mb-8 border-b border-[#f0f0f0]">
         <div className="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-        <div className="relative px-6 py-20 md:py-24 text-center">
-          <h1 className="text-4xl md:text-6xl font-serif text-[#1a1a1a] mb-4">
+        <div className="relative px-6 py-10 md:py-24 text-center">
+          <h1 className="text-3xl md:text-6xl font-serif text-[#1a1a1a] mb-2 md:mb-3">
             Shop by Occasion
           </h1>
-          <p className="text-lg md:text-xl opacity-70 font-light tracking-widest uppercase max-w-2xl mx-auto">
+          <p className="text-[10px] md:text-xl opacity-70 font-light tracking-[0.2em] md:tracking-widest uppercase max-w-2xl mx-auto">
             Thoughtful gifts for every special moment
           </p>
         </div>
@@ -81,14 +80,14 @@ const OccasionPage = () => {
       ) : (
         <>
           {/* Sticky Navigation Tabs */}
-          <div className="sticky top-[70px] z-30 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 mb-12">
+          <div className="sticky top-[72px] z-30 bg-white/90 backdrop-blur-md shadow-sm border-b border-gray-100 mb-8 md:mb-12">
             <div className="max-w-7xl mx-auto px-4">
-              <div className="flex overflow-x-auto scrollbar-hide py-4 gap-4 md:justify-center">
+              <div className="flex overflow-x-auto scrollbar-hide py-3 md:py-4 gap-3 md:gap-4 md:justify-center">
                 {occasions.map((occasion) => (
                   <button
                     key={occasion._id}
                     onClick={() => scrollToSection(occasion._id)}
-                    className={`whitespace-nowrap px-6 py-2 rounded-full text-sm uppercase tracking-wider transition-all duration-300 ${activeTab === occasion._id
+                    className={`whitespace-nowrap px-5 py-1.5 md:px-6 md:py-2 rounded-full text-[10px] md:text-sm uppercase tracking-wider transition-all duration-300 ${activeTab === occasion._id
                       ? "bg-[#2c3e50] text-white shadow-md transform scale-105"
                       : "bg-gray-100 text-gray-500 hover:bg-gray-200"
                       }`}
@@ -101,7 +100,7 @@ const OccasionPage = () => {
           </div>
 
           {/* Occasion Sections */}
-          <div className="max-w-7xl mx-auto px-4 pb-20 space-y-24">
+          <div className="max-w-7xl mx-auto px-4 pb-20 space-y-16 md:space-y-24">
             {occasions.map((occasion) => (
               <div
                 key={occasion._id}
@@ -109,8 +108,8 @@ const OccasionPage = () => {
                 className="scroll-mt-32"
               >
                 {/* Section Header */}
-                <div className="text-center mb-10">
-                  <h2 className="text-3xl md:text-4xl font-serif text-[#2c3e50] mb-3 relative inline-block">
+                <div className="text-center mb-10 px-4">
+                  <h2 className="text-2xl md:text-4xl font-serif text-[#2c3e50] mb-3 relative inline-block">
                     {occasion.name}
                     <span className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-12 h-1 bg-[#e0e0e0] rounded-full"></span>
                   </h2>
@@ -123,7 +122,7 @@ const OccasionPage = () => {
 
                 {/* Product Grid */}
                 {occasion.products?.length > 0 ? (
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+                  <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-10">
                     {occasion.products.map((product) => (
                       <ProductCard key={product._id} product={product} />
                     ))}

@@ -13,8 +13,8 @@ export default function WishlistPage() {
 
         <div className="flex justify-between items-end mb-8">
           <div>
-            <h1 className="text-3xl font-serif text-[#2c3e50] mb-2">My Wishlist</h1>
-            <p className="text-gray-500">Your saved favorites</p>
+            <h1 className="text-2xl md:text-3xl font-serif text-[#2c3e50] mb-1">My Wishlist</h1>
+            <p className="text-gray-500 text-xs md:text-sm">Your saved favorites</p>
           </div>
           {wishlist.length > 0 && (
             <button
@@ -42,11 +42,11 @@ export default function WishlistPage() {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-8">
             {wishlist.map((item, index) => (
               <div
                 key={index}
-                className="group bg-white rounded-2xl p-4 shadow-sm border border-gray-50 hover:shadow-lg transition-all duration-300 flex flex-col"
+                className="group bg-white rounded-xl md:rounded-2xl p-3 md:p-4 shadow-sm border border-gray-50 hover:shadow-lg transition-all duration-300 flex flex-col"
               >
                 <div className="relative aspect-square bg-gray-50 rounded-xl overflow-hidden mb-4">
                   <img
@@ -64,24 +64,24 @@ export default function WishlistPage() {
                 </div>
 
                 <div className="flex-1 flex flex-col">
-                  <h3 className="font-serif text-lg text-[#2c3e50] mb-1 line-clamp-1">
+                  <h3 className="font-serif text-sm md:text-lg text-[#2c3e50] mb-1 line-clamp-1">
                     {item.name}
                   </h3>
-                  <p className="text-gray-500 text-sm mb-3">
+                  <p className="text-gray-500 text-[10px] md:text-sm mb-2 md:mb-3 line-clamp-2">
                     {item.description ? (item.description.length > 50 ? item.description.substring(0, 50) + "..." : item.description) : "Elegant jewelry piece"}
                   </p>
 
-                  <div className="mt-auto flex items-center justify-between pt-4 border-t border-gray-50">
-                    <span className="font-medium text-[#2c3e50]">₹{item.price}</span>
+                  <div className="mt-auto flex flex-col gap-3 pt-3 md:pt-4 border-t border-gray-50">
+                    <span className="font-medium text-[#2c3e50] text-sm md:text-base text-center md:text-left">₹{item.price}</span>
                     <button
                       onClick={() => {
                         addToCart(item);
                         removeFromWishlist(index);
                       }}
-                      className="flex items-center gap-2 bg-[#2c3e50] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1a252f] transition-colors"
+                      className="flex items-center justify-center gap-2 bg-[#2c3e50] text-white px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm hover:bg-[#1a252f] transition-colors w-full"
                     >
-                      <FaShoppingCart size={12} />
-                      Move to Cart
+                      <FaShoppingCart size={10} />
+                      <span className="truncate">Move to Cart</span>
                     </button>
                   </div>
                 </div>
